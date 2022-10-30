@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.juicetracker.data
 
-buildscript {
-    ext {
-        compose_version = '1.2.1'
-        compose_compiler_version = '1.3.0'
-        nav_version = '2.5.3'
-        room_version = '2.4.3'
-        arch_lifecycle_version = '2.5.1'
-    }
-}
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '7.3.0' apply false
-    id 'com.android.library' version '7.3.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
-    id 'androidx.navigation.safeargs' version '2.5.2' apply false
+import kotlinx.coroutines.flow.Flow
+
+interface JuiceRepository {
+    val juicesStream: Flow<List<Juice>>
+
+    fun getJuiceStream(id: Long): Flow<Juice?>
+    suspend fun addJuice(juice: Juice)
+    suspend fun deleteJuice(juice: Juice)
+    suspend fun updateJuice(juice: Juice)
 }

@@ -17,27 +17,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/trackerFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.watertracker.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/trackerFragment"
+        android:name="com.example.juicetracker.TrackerFragment"
+        android:label="fragment_tracker"
+        tools:layout="@layout/fragment_tracker" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_trackerFragment_to_entryDialogFragment"
+            app:destination="@id/entryDialogFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.watertracker.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <dialog
+        android:id="@+id/entryDialogFragment"
+        android:name="com.example.juicetracker.EntryDialogFragment"
+        android:label="fragment_entry_dialog"
+        tools:layout="@layout/fragment_entry_dialog">
+        <argument
+            android:name="itemId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </dialog>
 </navigation>

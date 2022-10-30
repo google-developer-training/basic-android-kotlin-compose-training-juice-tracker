@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.juicetracker
 
-buildscript {
-    ext {
-        compose_version = '1.2.1'
-        compose_compiler_version = '1.3.0'
-        nav_version = '2.5.3'
-        room_version = '2.4.3'
-        arch_lifecycle_version = '2.5.1'
+import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
+import com.example.juicetracker.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
     }
-}
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '7.3.0' apply false
-    id 'com.android.library' version '7.3.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
-    id 'androidx.navigation.safeargs' version '2.5.2' apply false
 }
