@@ -36,8 +36,8 @@ class JuiceListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         private val nameView = binding.name
         private val description = binding.description
-        private val drinkImage = binding.drinkImage
-        private val rating = binding.rating
+        private val drinkImage = binding.drinkColorOverlay
+        private val ratingBar = binding.ratingBar
 
         fun bind(juice: Juice) {
             nameView.text = juice.name
@@ -46,7 +46,7 @@ class JuiceListAdapter(
                 JuiceColor.valueOf(juice.color).color,
                 android.graphics.PorterDuff.Mode.SRC_IN
             )
-            rating.text = juice.rating.toString()
+            ratingBar.rating = juice.rating.toFloat()
             binding.deleteButton.setOnClickListener {
                 onDelete(juice)
             }

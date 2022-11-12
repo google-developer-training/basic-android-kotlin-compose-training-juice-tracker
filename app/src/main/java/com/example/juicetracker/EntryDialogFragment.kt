@@ -43,9 +43,8 @@ import kotlinx.coroutines.launch
  */
 class EntryDialogFragment : BottomSheetDialogFragment() {
 
-    val entryViewModel by viewModels<EntryViewModel> { AppViewModelProvider.Factory }
+    private val entryViewModel by viewModels<EntryViewModel> { AppViewModelProvider.Factory }
     var selectedColor: JuiceColor = JuiceColor.Red
-    val colorLabelMap = JuiceColor.values().associateBy { getString(it.label) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,9 +57,10 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        val colorLabelMap = JuiceColor.values().associateBy { getString(it.label) }
         val binding = FragmentEntryDialogBinding.bind(view)
         val args: EntryDialogFragmentArgs by navArgs()
-        val juiceId = args.itemId ?: 0
+        val juiceId = args.itemId
 
         // If we arrived here with an itemId of >= 0, then we are editing an existing item
         if (args.itemId > 0) {
@@ -80,9 +80,9 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
             }
         }
 
-        binding.name.doOnTextChanged { text, start, before, count ->
-            // Enable Done button if the current text is longer than 3 characters
-            binding.doneButton.isEnabled = (start+count)>2
+        binding.name.doOnTextChanged { _, start, _, count ->
+            // Enable Save button if the current text is longer than 3 characters
+            binding.saveButton.isEnabled = (start+count) > 0
         }
         binding.colorSpinner.adapter = ArrayAdapter(
             requireContext(),
@@ -95,7 +95,7 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
                 // Get the label of the selected item
                 val selected = parent.getItemAtPosition(pos).toString()
                 // Get the enum value from string
-                selectedColor = colorLabelMap.get(selected) ?: selectedColor
+                selectedColor = colorLabelMap[selected] ?: selectedColor
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -104,9 +104,9 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
             }
         }
 
-        // When the user clicks the Done button, use the data here to either update
+        // When the user clicks the Save button, use the data here to either update
         // an existing item or create a new one
-        binding.doneButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             entryViewModel.saveJuice(
                 juiceId,
                 binding.name.text.toString(),

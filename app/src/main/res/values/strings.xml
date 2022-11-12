@@ -19,10 +19,10 @@
     <string name="delete">Delete</string>
     <string name="juice_name">Juice Name</string>
     <string name="juice_description">Description</string>
-    <string name="juice_rating">Juice Rating</string>
+    <string name="juice_rating">Rating</string>
     <string name="name">Name</string>
-    <string name="done">Done</string>
-    <string name="juice_color">Juice color</string>
+    <string name="save">Save</string>
+    <string name="juice_color">Color</string>
 
     <string name="red">Red</string>
     <string name="blue">Blue</string>

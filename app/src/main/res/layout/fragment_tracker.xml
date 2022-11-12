@@ -33,6 +33,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:maxImageSize="32dp"
-        app:srcCompat="@drawable/local_drink" />
+        app:srcCompat="@drawable/ic_plus_24" />
 
 </FrameLayout>

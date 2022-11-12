@@ -35,6 +35,6 @@
         <argument
             android:name="itemId"
             app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="0L" />
     </dialog>
 </navigation>
