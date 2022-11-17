@@ -23,6 +23,10 @@
     <string name="name">Name</string>
     <string name="save">Save</string>
     <string name="juice_color">Color</string>
+    <plurals name="number_of_stars">
+        <item quantity="one">%d star</item>
+        <item quantity="other">%d stars</item>
+    </plurals>
 
     <string name="red">Red</string>
     <string name="blue">Blue</string>
