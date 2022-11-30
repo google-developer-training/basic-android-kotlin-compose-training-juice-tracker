@@ -106,16 +106,6 @@ fun SheetForm(
             fieldValue = juice.description,
             onValueChange = { description -> onUpdateJuice(juice.copy(description = description)) }
         )
-        ColorSpinnerRow(
-            colorSpinnerPosition = JuiceColor.valueOf(juice.color).ordinal,
-            onColorChange = { color ->
-                onUpdateJuice(juice.copy(color = JuiceColor.values()[color].name))
-            }
-        )
-        RatingInputRow(
-            rating = juice.rating,
-            onRatingChange = { rating -> onUpdateJuice(juice.copy(rating = rating)) }
-        )
         ButtonRow(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             onCancel = onCancel,

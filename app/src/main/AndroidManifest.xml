@@ -26,10 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JuiceTracker"
         tools:targetApi="33">
-        <!--Current value is adMob test app ID-->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
