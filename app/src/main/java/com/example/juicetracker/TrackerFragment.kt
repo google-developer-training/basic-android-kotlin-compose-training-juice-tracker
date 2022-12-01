@@ -40,7 +40,7 @@ class TrackerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentTrackerBinding.inflate(inflater, container, false).root
     }
 
