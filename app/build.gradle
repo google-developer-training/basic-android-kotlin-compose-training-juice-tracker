@@ -50,10 +50,17 @@ android {
     }
     buildFeatures {
         viewBinding true
+        // Enables Jetpack Compose for this module
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "$compose_version"
     }
 }
 
 dependencies {
+    implementation platform('androidx.compose:compose-bom:2022.11.00')
+
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -69,4 +76,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
     implementation 'com.google.android.material:material:1.7.0'
+
+    // Compose
+    implementation "androidx.activity:activity-compose:1.6.1"
+    implementation "androidx.compose.material:material:material"
 }
