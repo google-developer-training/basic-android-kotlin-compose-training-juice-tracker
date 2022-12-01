@@ -15,7 +15,6 @@
  */
 package com.example.juicetracker.data
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
