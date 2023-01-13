@@ -91,7 +91,7 @@
         android:id="@+id/deleteButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@color/white"
+        android:background="?attr/colorSurface"
         android:contentDescription="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
