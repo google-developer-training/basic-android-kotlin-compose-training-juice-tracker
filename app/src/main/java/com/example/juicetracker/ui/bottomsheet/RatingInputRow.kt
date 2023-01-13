@@ -31,7 +31,6 @@ import com.example.juicetracker.R
 fun RatingInputRow(rating: Int, onRatingChange: (Int) -> Unit, modifier: Modifier = Modifier) {
     InputRow(inputLabel = stringResource(R.string.rating), modifier = modifier) {
         AndroidView(
-            modifier = Modifier.padding(end = 48.dp),
             factory = { context ->
                 RatingBar(context).apply {
                     stepSize = 1f
