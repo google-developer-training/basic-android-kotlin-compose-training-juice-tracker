@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -79,12 +80,14 @@ fun EntryBottomSheet(
 
 @Composable
 fun SheetHeader(modifier: Modifier = Modifier) {
-    Text(
-        modifier = modifier.padding(16.dp),
-        text = stringResource(R.string.bottom_sheet_headline),
-        style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
-    )
-    Divider()
+    Column(modifier = modifier.padding(8.dp)) {
+        Text(
+            modifier = modifier.padding(8.dp),
+            text = stringResource(R.string.bottom_sheet_headline),
+            style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold)
+        )
+        Divider()
+    }
 }
 
 @Composable
@@ -151,6 +154,7 @@ fun TextInputRow(
 ) {
     InputRow(inputLabel, modifier) {
         TextField(
+            modifier = Modifier.fillMaxWidth(),
             value = fieldValue,
             onValueChange = onValueChange,
             singleLine = true,
@@ -170,7 +174,7 @@ fun InputRow(
     content: @Composable () -> Unit
 ) {
     Row(
-        modifier = modifier.padding(bottom = 16.dp),
+        modifier = modifier.padding(bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -180,7 +184,7 @@ fun InputRow(
                 .weight(1f)
                 .padding(end = 8.dp),
         )
-        Box(modifier = Modifier.weight(3f)) {
+        Box(modifier = Modifier.weight(2f)) {
             content()
         }
     }
