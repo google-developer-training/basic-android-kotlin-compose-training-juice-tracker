@@ -48,6 +48,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.juicetracker.R
 import com.example.juicetracker.data.Juice
 import com.example.juicetracker.data.JuiceColor
+import com.google.accompanist.themeadapter.material.MdcTheme
 
 class JuiceListAdapter(
     private var onEdit: (Juice) -> Unit,
@@ -73,23 +74,25 @@ class JuiceListAdapter(
 
         fun bind(input: Juice) {
             composeView.setContent {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onEdit(input)
-                        }
-                        .padding(vertical = 8.dp, horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    JuiceIcon(input.color)
-                    JuiceDetails(input, Modifier.weight(1f))
-                    DeleteButton(
-                        onDelete = {
-                            onDelete(input)
-                        },
-                        modifier = Modifier.align(Alignment.Top)
-                    )
+                MdcTheme {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onEdit(input)
+                            }
+                            .padding(vertical = 8.dp, horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        JuiceIcon(input.color)
+                        JuiceDetails(input, Modifier.weight(1f))
+                        DeleteButton(
+                            onDelete = {
+                                onDelete(input)
+                            },
+                            modifier = Modifier.align(Alignment.Top)
+                        )
+                    }
                 }
             }
         }
