@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    ext {
-        lifecycle_version = '2.6.1'
-        room_version = '2.5.1'
+package com.example.juicetracker
+
+import android.app.Application
+import com.example.juicetracker.data.AppContainer
+import com.example.juicetracker.data.AppDataContainer
+
+class JuiceTrackerApplication : Application() {
+    /**
+     * AppContainer instance used by the rest of classes to obtain dependencies
+     */
+    lateinit var container: AppContainer
+    override fun onCreate() {
+        super.onCreate()
+        container = AppDataContainer(this)
     }
-}
-plugins {
-    id 'com.android.application' version '8.0.0-beta05' apply false
-    id 'com.android.library' version '8.0.0-beta05' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
 }

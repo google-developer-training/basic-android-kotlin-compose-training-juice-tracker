@@ -15,4 +15,25 @@
   -->
 <resources>
     <string name="app_name">Juice Tracker</string>
+    <string name="delete">Delete</string>
+    <string name="juice_name">Juice Name</string>
+    <string name="juice_description">Description</string>
+    <string name="save">Save</string>
+    <string name="rating">Rating</string>
+    <string name="color">Color</string>
+    <string name="add_juice">Add juice</string>
+    <string name="bottom_sheet_headline">Types of juice</string>
+    <string name="juice_color">%s juice</string>
+    <plurals name="number_of_stars">
+        <item quantity="one">%d star</item>
+        <item quantity="other">%d stars</item>
+    </plurals>
+
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="cyan">Cyan</string>
+    <string name="yellow">Yellow</string>
+    <string name="magenta">Magenta</string>
+    <string name="orange">Orange</string>
 </resources>

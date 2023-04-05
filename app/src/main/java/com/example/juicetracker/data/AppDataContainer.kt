@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    ext {
-        lifecycle_version = '2.6.1'
-        room_version = '2.5.1'
+package com.example.juicetracker.data
+
+import android.content.Context
+
+/**
+ * [AppContainer] implementation that provides instance of [RoomJuiceRepository]
+ */
+class AppDataContainer(private val context: Context) : AppContainer {
+    /**
+     * Implementation for [JuiceRepository]
+     */
+    override val juiceRepository: JuiceRepository by lazy {
+        RoomJuiceRepository(AppDatabase.getDatabase(context).juiceDao())
     }
-}
-plugins {
-    id 'com.android.application' version '8.0.0-beta05' apply false
-    id 'com.android.library' version '8.0.0-beta05' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
 }

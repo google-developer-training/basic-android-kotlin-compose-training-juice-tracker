@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    ext {
-        lifecycle_version = '2.6.1'
-        room_version = '2.5.1'
-    }
-}
-plugins {
-    id 'com.android.application' version '8.0.0-beta05' apply false
-    id 'com.android.library' version '8.0.0-beta05' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
+package com.example.juicetracker.data
+
+import kotlinx.coroutines.flow.Flow
+
+/**
+ * Interface for [JuiceRepository] which contains method to access and modify juice items
+ */
+interface JuiceRepository {
+    val juiceStream: Flow<List<Juice>>
+    suspend fun addJuice(juice: Juice)
+    suspend fun deleteJuice(juice: Juice)
+    suspend fun updateJuice(juice: Juice)
 }

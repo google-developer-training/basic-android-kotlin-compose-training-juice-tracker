@@ -1,0 +1,102 @@
+/*
+ * Copyright (C) 2023 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.example.juicetracker.ui
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.juicetracker.R
+import com.example.juicetracker.ui.bottomsheet.EntryBottomSheet
+import com.example.juicetracker.ui.homescreen.AdBanner
+import com.example.juicetracker.ui.homescreen.JuiceTrackerFAB
+import com.example.juicetracker.ui.homescreen.JuiceTrackerList
+import com.example.juicetracker.ui.homescreen.JuiceTrackerTopAppBar
+import kotlinx.coroutines.launch
+
+@Composable
+fun JuiceTrackerApp(
+    juiceTrackerViewModel: JuiceTrackerViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+
+    val sheetState = rememberModalBottomSheetState(
+        ModalBottomSheetValue.Hidden
+    )
+
+    val scope = rememberCoroutineScope()
+    val trackerState by juiceTrackerViewModel.juiceListStream.collectAsState(emptyList())
+
+    EntryBottomSheet(
+        juiceTrackerViewModel = juiceTrackerViewModel,
+        modifier = Modifier,
+        onCancel = {
+            scope.launch {
+                sheetState.hide()
+            }
+        },
+        onSubmit = {
+            juiceTrackerViewModel.saveJuice()
+            scope.launch {
+                sheetState.hide()
+            }
+        },
+        sheetState = sheetState
+    ) {
+        Scaffold(
+            topBar = {
+                JuiceTrackerTopAppBar()
+            },
+            floatingActionButton = {
+                JuiceTrackerFAB(
+                    onClick = {
+                        juiceTrackerViewModel.resetCurrentJuice()
+                        scope.launch { sheetState.show() }
+                    }
+                )
+            }
+        ) { contentPadding ->
+            Column(Modifier.padding(contentPadding)) {
+                AdBanner(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            top = dimensionResource(R.dimen.padding_medium),
+                            bottom = dimensionResource(R.dimen.padding_small)
+                        )
+                )
+                JuiceTrackerList(
+                    juices = trackerState,
+                    onDelete = { juice -> juiceTrackerViewModel.deleteJuice(juice) },
+                    onUpdate = { juice ->
+                        juiceTrackerViewModel.updateCurrentJuice(juice)
+                        scope.launch {
+                            sheetState.show()
+                        }
+                    },
+                )
+            }
+        }
+    }
+}
