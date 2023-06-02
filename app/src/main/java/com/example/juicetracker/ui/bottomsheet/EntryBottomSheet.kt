@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,16 +22,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -43,11 +42,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.juicetracker.R
 import com.example.juicetracker.data.Juice
-import com.example.juicetracker.data.JuiceColor
 import com.example.juicetracker.ui.JuiceTrackerViewModel
 import java.util.Locale
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EntryBottomSheet(
     juiceTrackerViewModel: JuiceTrackerViewModel,
@@ -84,7 +81,7 @@ fun SheetHeader(modifier: Modifier = Modifier) {
         Text(
             modifier = modifier.padding(8.dp),
             text = stringResource(R.string.bottom_sheet_headline),
-            style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold)
+            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
         )
         Divider()
     }
@@ -160,7 +157,7 @@ fun TextInputRow(
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colors.surface
+                containerColor = MaterialTheme.colorScheme.surface
             ),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
