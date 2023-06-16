@@ -31,7 +31,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -41,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -48,7 +48,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.juicetracker.R
 import com.example.juicetracker.data.Juice
 import com.example.juicetracker.data.JuiceColor
-import com.google.accompanist.themeadapter.material.MdcTheme
+import com.google.accompanist.themeadapter.material3.Mdc3Theme
 
 class JuiceListAdapter(
     private var onEdit: (Juice) -> Unit,
@@ -74,27 +74,40 @@ class JuiceListAdapter(
 
         fun bind(input: Juice) {
             composeView.setContent {
-                MdcTheme {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                onEdit(input)
-                            }
-                            .padding(vertical = 8.dp, horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        JuiceIcon(input.color)
-                        JuiceDetails(input, Modifier.weight(1f))
-                        DeleteButton(
-                            onDelete = {
-                                onDelete(input)
-                            },
-                            modifier = Modifier.align(Alignment.Top)
-                        )
-                    }
-                }
+                ListItem(
+                    input,
+                    onDelete,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onEdit(input)
+                        }
+                        .padding(vertical = 8.dp, horizontal = 16.dp),
+                )
             }
+        }
+    }
+}
+
+@Composable
+fun ListItem(
+    input: Juice,
+    onDelete: (Juice) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Mdc3Theme {
+        Row(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            JuiceIcon(input.color)
+            JuiceDetails(input, Modifier.weight(1f))
+            DeleteButton(
+                onDelete = {
+                    onDelete(input)
+                },
+                modifier = Modifier.align(Alignment.Top)
+            )
         }
     }
 }
@@ -115,9 +128,9 @@ fun JuiceDetails(juice: Juice, modifier: Modifier = Modifier) {
 fun DeleteButton(onDelete: () -> Unit, modifier: Modifier = Modifier) {
     IconButton(
         onClick = { onDelete() },
+        modifier = modifier
     ) {
         Icon(
-            modifier = modifier,
             painter = painterResource(R.drawable.ic_delete),
             contentDescription = stringResource(R.string.delete)
         )
@@ -133,7 +146,7 @@ fun DeleteButton(onDelete: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 fun JuiceIcon(color: String, modifier: Modifier = Modifier) {
     val colorLabelMap = JuiceColor.values().associateBy { stringResource(it.label) }
-    val selectedColor = colorLabelMap.get(color)?.let { Color(it.color) }
+    val selectedColor = colorLabelMap[color]?.let { Color(it.color) }
     val juiceIconContentDescription = stringResource(R.string.juice_color, color)
 
     Box(
@@ -151,7 +164,6 @@ fun JuiceIcon(color: String, modifier: Modifier = Modifier) {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RatingDisplay(rating: Int, modifier: Modifier = Modifier) {
     val displayDescription = pluralStringResource(R.plurals.number_of_stars, count = rating)
@@ -180,4 +192,28 @@ class JuiceDiffCallback : DiffUtil.ItemCallback<Juice>() {
     override fun areContentsTheSame(oldItem: Juice, newItem: Juice): Boolean {
         return oldItem == newItem
     }
+}
+
+@Preview
+@Composable
+fun PreviewJuiceIcon() {
+    JuiceIcon("Yellow")
+}
+
+@Preview
+@Composable
+fun PreviewJuiceDetails() {
+    JuiceDetails(Juice(1, "Sweet Beet", "Apple, carrot, beet, and lemon", "Red", 4))
+}
+
+@Preview
+@Composable
+fun PreviewDeleteIcon() {
+    DeleteButton({})
+}
+
+@Preview
+@Composable
+fun PreviewListItem() {
+    ListItem(Juice(1, "Sweet Beet", "Apple, carrot, beet, and lemon", "Red", 4), {})
 }
