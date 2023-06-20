@@ -22,11 +22,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -48,7 +49,7 @@ import java.util.Locale
 @Composable
 fun EntryBottomSheet(
     juiceTrackerViewModel: JuiceTrackerViewModel,
-    sheetState: ModalBottomSheetState,
+    bottomSheetScaffoldState: BottomSheetScaffoldState,
     onCancel: () -> Unit,
     onSubmit: () -> Unit,
     modifier: Modifier = Modifier,
@@ -56,9 +57,9 @@ fun EntryBottomSheet(
 ) {
     val juice by juiceTrackerViewModel.currentJuiceStream.collectAsState()
 
-    ModalBottomSheetLayout(
+    BottomSheetScaffold(
         modifier = modifier,
-        sheetState = sheetState,
+        scaffoldState = bottomSheetScaffoldState,
         sheetContent = {
             Column {
                 SheetHeader()
@@ -155,9 +156,10 @@ fun TextInputRow(
             value = fieldValue,
             onValueChange = onValueChange,
             singleLine = true,
-            maxLines = 1,
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.surface
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = colorScheme.surface,
+                unfocusedContainerColor = colorScheme.surface,
+                disabledContainerColor = colorScheme.surface,
             ),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )
