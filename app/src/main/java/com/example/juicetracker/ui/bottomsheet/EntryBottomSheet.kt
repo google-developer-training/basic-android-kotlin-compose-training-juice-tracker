@@ -26,6 +26,7 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedButton
@@ -46,10 +47,11 @@ import com.example.juicetracker.data.Juice
 import com.example.juicetracker.ui.JuiceTrackerViewModel
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryBottomSheet(
     juiceTrackerViewModel: JuiceTrackerViewModel,
-    bottomSheetScaffoldState: BottomSheetScaffoldState,
+    sheetScaffoldState: BottomSheetScaffoldState,
     onCancel: () -> Unit,
     onSubmit: () -> Unit,
     modifier: Modifier = Modifier,
@@ -59,7 +61,7 @@ fun EntryBottomSheet(
 
     BottomSheetScaffold(
         modifier = modifier,
-        scaffoldState = bottomSheetScaffoldState,
+        scaffoldState = sheetScaffoldState,
         sheetContent = {
             Column {
                 SheetHeader()
