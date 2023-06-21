@@ -22,12 +22,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -48,10 +49,11 @@ import com.example.juicetracker.data.JuiceColor
 import com.example.juicetracker.ui.JuiceTrackerViewModel
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryBottomSheet(
     juiceTrackerViewModel: JuiceTrackerViewModel,
-    sheetState: ModalBottomSheetState,
+    sheetScaffoldState: BottomSheetScaffoldState,
     onCancel: () -> Unit,
     onSubmit: () -> Unit,
     modifier: Modifier = Modifier,
@@ -59,9 +61,9 @@ fun EntryBottomSheet(
 ) {
     val juice by juiceTrackerViewModel.currentJuiceStream.collectAsState()
 
-    ModalBottomSheetLayout(
+    BottomSheetScaffold(
         modifier = modifier,
-        sheetState = sheetState,
+        scaffoldState = sheetScaffoldState,
         sheetContent = {
             Column {
                 SheetHeader(Modifier.padding(dimensionResource(R.dimen.padding_small)))
@@ -178,8 +180,10 @@ fun TextInputRow(
             onValueChange = onValueChange,
             singleLine = true,
             maxLines = 1,
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.surface
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = colorScheme.surface,
+                unfocusedContainerColor = colorScheme.surface,
+                disabledContainerColor = colorScheme.surface,
             ),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
         )

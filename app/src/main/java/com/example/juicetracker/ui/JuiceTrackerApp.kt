@@ -18,9 +18,13 @@ package com.example.juicetracker.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,13 +40,17 @@ import com.example.juicetracker.ui.homescreen.JuiceTrackerList
 import com.example.juicetracker.ui.homescreen.JuiceTrackerTopAppBar
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun JuiceTrackerApp(
     juiceTrackerViewModel: JuiceTrackerViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
 
-    val sheetState = rememberModalBottomSheetState(
-        ModalBottomSheetValue.Hidden
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
+        bottomSheetState = rememberStandardBottomSheetState(
+            initialValue = SheetValue.Hidden,
+            skipHiddenState = false,
+        )
     )
 
     val scope = rememberCoroutineScope()
@@ -50,19 +58,19 @@ fun JuiceTrackerApp(
 
     EntryBottomSheet(
         juiceTrackerViewModel = juiceTrackerViewModel,
+        sheetScaffoldState = bottomSheetScaffoldState,
         modifier = Modifier,
         onCancel = {
             scope.launch {
-                sheetState.hide()
+                bottomSheetScaffoldState.bottomSheetState.hide()
             }
         },
         onSubmit = {
             juiceTrackerViewModel.saveJuice()
             scope.launch {
-                sheetState.hide()
+                bottomSheetScaffoldState.bottomSheetState.hide()
             }
-        },
-        sheetState = sheetState
+        }
     ) {
         Scaffold(
             topBar = {
@@ -72,7 +80,7 @@ fun JuiceTrackerApp(
                 JuiceTrackerFAB(
                     onClick = {
                         juiceTrackerViewModel.resetCurrentJuice()
-                        scope.launch { sheetState.show() }
+                        scope.launch { bottomSheetScaffoldState.bottomSheetState.expand() }
                     }
                 )
             }
@@ -92,7 +100,7 @@ fun JuiceTrackerApp(
                     onUpdate = { juice ->
                         juiceTrackerViewModel.updateCurrentJuice(juice)
                         scope.launch {
-                            sheetState.show()
+                            bottomSheetScaffoldState.bottomSheetState.expand()
                         }
                     },
                 )
