@@ -36,7 +36,7 @@ class SpinnerAdapter(val onColorChange: (Int) -> Unit) : AdapterView.OnItemSelec
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        onColorChange(JuiceColor.Red.ordinal)
+        onColorChange(0)
     }
 }
 

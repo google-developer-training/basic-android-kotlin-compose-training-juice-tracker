@@ -120,7 +120,7 @@ fun SheetForm(
             modifier = Modifier.fillMaxWidth()
         )
         ColorSpinnerRow(
-            colorSpinnerPosition = JuiceColor.valueOf(juice.color).ordinal,
+            colorSpinnerPosition = findColorIndex(juice.color),
             onColorChange = { color ->
                 onUpdateJuice(juice.copy(color = JuiceColor.values()[color].name))
             }
@@ -209,4 +209,9 @@ fun InputRow(
             content()
         }
     }
+}
+
+private fun findColorIndex(color: String): Int {
+    val juiceColor = JuiceColor.valueOf(color)
+    return JuiceColor.values().indexOf(juiceColor)
 }
