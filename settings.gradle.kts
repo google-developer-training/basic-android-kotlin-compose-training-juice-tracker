@@ -29,4 +29,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Juice Tracker"
-include ':app'
+include(":app")
