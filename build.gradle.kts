@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
+buildscript {
+    extra.apply {
+        set("arch_lifecycle_version", "2.6.1")
+        set("room_version", "2.5.2")
     }
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id("com.android.application") version "8.1.0" apply false
+    id("com.android.library") version "8.1.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
 }
-rootProject.name = "Juice Tracker"
-include ':app'
