@@ -62,6 +62,7 @@ fun EntryBottomSheet(
     BottomSheetScaffold(
         modifier = modifier,
         scaffoldState = sheetScaffoldState,
+        sheetPeekHeight = 0.dp,
         sheetContent = {
             Column {
                 SheetHeader()
