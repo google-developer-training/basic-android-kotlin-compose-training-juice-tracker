@@ -64,6 +64,7 @@ fun EntryBottomSheet(
     BottomSheetScaffold(
         modifier = modifier,
         scaffoldState = sheetScaffoldState,
+        sheetPeekHeight = 0.dp,
         sheetContent = {
             Column {
                 SheetHeader(Modifier.padding(dimensionResource(R.dimen.padding_small)))
