@@ -35,7 +35,7 @@ object AppViewModelProvider {
     }
 }
 /**
- * Extension function to queries for [Application] object and returns an instance of
+ * Extension function to query for [Application] object and returns an instance of
  * [JuiceTrackerApplication].
  */
 fun CreationExtras.juiceTrackerApplication(): JuiceTrackerApplication =
