@@ -30,8 +30,8 @@ fun JuiceTrackerFAB(
     modifier: Modifier = Modifier
 ) {
     FloatingActionButton(
-        modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
+        modifier = modifier
     ) {
         Icon(
             imageVector = Icons.Default.Add,

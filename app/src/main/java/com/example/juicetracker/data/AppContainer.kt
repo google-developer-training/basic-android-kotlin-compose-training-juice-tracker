@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.juicetracker.data
 
+package com.example.juicetracker.data
 
 /**
  * App container for Dependency injection.
@@ -22,5 +22,3 @@ package com.example.juicetracker.data
 interface AppContainer {
     val juiceRepository: JuiceRepository
 }
-
-
