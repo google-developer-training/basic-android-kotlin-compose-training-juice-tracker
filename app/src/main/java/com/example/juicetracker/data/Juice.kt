@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.juicetracker.R
+import com.example.juicetracker.ui.theme.PinkColor
 import com.example.juicetracker.ui.theme.Orange as OrangeColor
 
 /**
@@ -46,5 +47,6 @@ enum class JuiceColor(val color: Color, @StringRes val label: Int) {
     Cyan(Color.Cyan, R.string.cyan),
     Yellow(Color.Yellow, R.string.yellow),
     Magenta(Color.Magenta, R.string.magenta),
-    Orange(OrangeColor, R.string.orange)
+    Orange(OrangeColor, R.string.orange),
+    Pink(PinkColor, R.string.pink)
 }
