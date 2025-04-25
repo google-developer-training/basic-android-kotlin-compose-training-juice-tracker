@@ -19,7 +19,7 @@
 buildscript {
     extra.apply {
         set("nav_version", "2.8.9")
-        set("room_version", "2.7.0")
+        set("room_version", "2.7.1")
         set("arch_lifecycle_version", "2.8.7")
     }
 }
