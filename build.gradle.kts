@@ -18,14 +18,14 @@
 
 buildscript {
     extra.apply {
-        set("nav_version", "2.8.9")
+        set("nav_version", "2.9.0")
         set("room_version", "2.7.1")
-        set("arch_lifecycle_version", "2.8.7")
+        set("arch_lifecycle_version", "2.9.0")
     }
 }
 plugins {
-    id("com.android.application") version "8.9.2" apply false
-    id("com.android.library") version "8.9.2" apply false
+    id("com.android.application") version "8.10.0" apply false
+    id("com.android.library") version "8.10.0" apply false
     id("org.jetbrains.kotlin.android") version "2.1.20" apply false
-    id("androidx.navigation.safeargs") version "2.8.9" apply false
+    id("androidx.navigation.safeargs") version "2.9.0" apply false
 }
